@@ -1,0 +1,93 @@
+<div class="header">
+  <div class="htitle"><h1>Test table data</h1> </div>
+  <div class="hbutton"><button type="reset" (click)="showForm()">Add New item</button></div>
+</div>
+<div class="d-flex justify-content-center"> 
+<div class="spinner-border" role="status" > 
+	<span class="sr-only" id="loading">Loading...</span> 
+</div> 
+</div>
+
+<div class="table-container">
+<table mat-table [dataSource]="lis" class="mat-elevation-z8 full-width-table ">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name. </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> Position</th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <!-- Office Column -->
+  <ng-container matColumnDef="office">
+    <th mat-header-cell *matHeaderCellDef> Office </th>
+    <td mat-cell *matCellDef="let element"> {{element.office}} </td>
+  </ng-container>
+
+  <!-- salary Column -->
+  <ng-container matColumnDef="salary">
+    <th mat-header-cell *matHeaderCellDef> Salary</th>
+    <td mat-cell *matCellDef="let element"> {{element.salary}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table></div>
+<div class="card m-3" *ngIf="showform">
+    <h1>Test form</h1> 
+    <div class="card-body">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                
+                <div class="form-group col-5">
+                    <label>Name</label>
+                    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-5">
+                    <label>Position</label>
+                    <input type="text" formControlName="position" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.position.errors }" />
+                    <div *ngIf="submitted && f.position.errors" class="invalid-feedback">
+                        <div *ngIf="f.position.errors.required">Position is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Office</label>
+                <input type="text" formControlName="office" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.office.errors }" />
+                <div *ngIf="submitted && f.office.errors" class="invalid-feedback">
+                    <div *ngIf="f.office.errors.required">Office is required</div>
+                    
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Salary</label>
+                    <input type="text" formControlName="salary" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.salary.errors }" />
+                    <div *ngIf="submitted && f.salary.errors" class="invalid-feedback">
+                        <div *ngIf="f.salary.errors.required">salary is required</div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="text-center">
+                <button class="btn btn-primary mr-1">Register</button>
+                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+
+				 
