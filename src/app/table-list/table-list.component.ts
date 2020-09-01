@@ -10,23 +10,28 @@ import {MatTable} from '@angular/material/table';
 
 
 export class TableListComponent implements OnInit {
+  
   li:any; 
   lis=[]; 
   registerForm: FormGroup;
   submitted = false;
-  @ViewChild(MatTable) table: MatTable<any>;
+  @ViewChild(MatTable) table: MatTable<any>; //for refreshing table on update of lis
   showform: boolean =false;
-  displayedColumns: string[] = ['name', 'position', 'office', 'salary'];
-  constructor(private http : HttpClient, private formBuilder: FormBuilder){ 
-      } 
+  displayedColumns: string[] = ['name', 'position', 'office', 'salary']; //table heading
+  
+  constructor(private http : HttpClient, private formBuilder: FormBuilder){ //intialise hhtp,formbuilder
+  } 
   
   ngOnInit(): void { 
-     this.registerForm = this.formBuilder.group({
+
+    this.registerForm = this.formBuilder.group({
             name: ['', Validators.required],
             position: ['', Validators.required],
             office: ['', Validators.required],
             salary: ['', Validators.required]
-        });
+        }); //for form validation
+
+    
     this.http.get('http://www.mocky.io/v2/5ea172973100002d001eeada') 
     .subscribe(Response => { 
   
@@ -38,11 +43,13 @@ export class TableListComponent implements OnInit {
       console.log(Response) 
       this.li=Response; 
       this.lis=this.li.list; 
-    }); 
-    function hideloader(){ 
+    }); //for fetching api
+
+    function hideloader(){ //hide loading
       document.getElementById('loading').style.display = 'none';} 
     }
-    get f() { return this.registerForm.controls; }
+
+    get f() { return this.registerForm.controls; } //validation check
 
     onSubmit() {
         this.submitted = true;
@@ -53,22 +60,24 @@ export class TableListComponent implements OnInit {
             return;
         }
 
-        // display form values on success
-        this.lis.push(this.registerForm.value)
-            console.log(this.lis);this.table.renderRows()
-            this.showform =false
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+        
+        this.lis.push(this.registerForm.value)  // insertform values on success validation
+        console.log(this.lis);
+        this.table.renderRows() //reload table
+        this.showform =false //to hide form
+        
     }
 
-    onReset() {
+    onReset() { //clear form
         this.submitted = false;
         this.registerForm.reset();
     }
-    showForm(){
+
+    showForm(){ //show form
       this.showform=true
     }
 
 
-    } 
+} 
 
   

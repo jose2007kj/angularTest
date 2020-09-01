@@ -14,25 +14,25 @@
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-  <!-- Position Column -->
+  <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name. </th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
 
-  <!-- Name Column -->
+  <!-- Position Column -->
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef> Position</th>
     <td mat-cell *matCellDef="let element"> {{element.position}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
+  <!-- Office Column -->
   <ng-container matColumnDef="office">
     <th mat-header-cell *matHeaderCellDef> Office </th>
     <td mat-cell *matCellDef="let element"> {{element.office}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!-- salary Column -->
   <ng-container matColumnDef="salary">
     <th mat-header-cell *matHeaderCellDef> Salary</th>
     <td mat-cell *matCellDef="let element"> {{element.salary}} </td>
